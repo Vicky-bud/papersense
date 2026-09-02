@@ -1,7 +1,8 @@
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy import Column, String, DateTime, Text, Integer, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy import JSON
+from sqlalchemy import Uuid as UUID
 from sqlalchemy.orm import relationship
 
 from backend.models.base import Base
@@ -36,7 +37,7 @@ class Chunk(Base):
     text_content = Column(Text, nullable=False)
     
     # Optional metadata dictionary (for section titles or bounding boxes)
-    metadata_ = Column(JSONB, nullable=True)
+    metadata_ = Column(JSON, nullable=True)
     
     # Relationships
     paper = relationship("Paper", back_populates="chunks")

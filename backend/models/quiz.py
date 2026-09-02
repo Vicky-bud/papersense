@@ -1,7 +1,8 @@
 import uuid
 from datetime import datetime, timezone
 from sqlalchemy import Column, String, DateTime, ForeignKey, Integer, Float, Text
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy import JSON
+from sqlalchemy import Uuid as UUID
 from sqlalchemy.orm import relationship
 
 from backend.models.base import Base
@@ -25,7 +26,7 @@ class QuizQuestion(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     quiz_id = Column(UUID(as_uuid=True), ForeignKey("quizzes.id", ondelete="CASCADE"), nullable=False)
     question_text = Column(Text, nullable=False)
-    options = Column(JSONB, nullable=False)  # List of strings e.g., ["A", "B", "C", "D"]
+    options = Column(JSON, nullable=False)  # List of strings e.g., ["A", "B", "C", "D"]
     correct_answer_index = Column(Integer, nullable=False)
     explanation = Column(Text, nullable=True)
     
