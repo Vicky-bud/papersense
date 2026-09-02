@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Workspace from './components/reader/Workspace';
 import QuizView from './components/quiz/QuizView';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/workspace/dummy-uuid" />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/workspace/:paperId" element={<Workspace />} />
-        {/* We use a wrapper for QuizView since it expects paperId as prop for now, or we can use useParams inside it. Let's use an inline render */}
         <Route path="/quiz/:paperId" element={<QuizRouteWrapper />} />
       </Routes>
     </BrowserRouter>

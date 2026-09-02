@@ -29,3 +29,19 @@ export async function submitQuiz(quizId: string, answers: Record<string, number>
   if (!res.ok) throw new Error('Failed to submit quiz');
   return res.json();
 }
+
+export async function getNote(paperId: string) {
+  const res = await fetch(`${API_BASE}/notes/${paperId}`);
+  if (!res.ok) throw new Error('Failed to fetch note');
+  return res.json();
+}
+
+export async function saveNote(paperId: string, content: string) {
+  const res = await fetch(`${API_BASE}/notes/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ paper_id: paperId, content }),
+  });
+  if (!res.ok) throw new Error('Failed to save note');
+  return res.json();
+}
