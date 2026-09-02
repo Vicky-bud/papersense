@@ -8,5 +8,8 @@ pydantic-settings
 chromadb
 python-multipart
 httpx
-pdfplumber
 asyncpg
+pymupdf
+python-docx
+tiktoken
+langchain-text-splitters
