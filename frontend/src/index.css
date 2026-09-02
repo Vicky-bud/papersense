@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-zinc-300 font-sans antialiased selection:bg-primary/30 selection:text-white;
+  }
+}
+
+@layer components {
+  .border-sharp {
+    @apply border border-border;
+  }
+  
+  .card {
+    @apply bg-surface border-sharp;
+  }
+  
+  .badge {
+    @apply inline-flex items-center justify-center rounded-sm bg-zinc-800 px-2 py-0.5 text-xs font-mono text-zinc-400 border border-zinc-700 cursor-pointer hover:bg-zinc-700 hover:text-white transition-colors;
+  }
+  
+  /* Split pane layouts */
+  .pane-left {
+    @apply w-[55%] h-screen border-r border-border overflow-hidden bg-[#0F0F11];
+  }
+  
+  .pane-right {
+    @apply w-[45%] h-screen overflow-y-auto bg-background p-6;
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
