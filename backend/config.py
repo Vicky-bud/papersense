@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     # ChromaDB Configuration
     CHROMA_PERSIST_DIRECTORY: str = "./.chroma"
     
+    # LLM Configuration
+    GEMINI_API_KEY: str = ""
+    
     @property
     def sync_database_url(self) -> str:
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"

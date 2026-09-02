@@ -13,3 +13,5 @@ pymupdf
 python-docx
 tiktoken
 langchain-text-splitters
+google-generativeai
+python-dotenv
