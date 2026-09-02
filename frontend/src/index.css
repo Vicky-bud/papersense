@@ -23,11 +23,11 @@
   
   /* Split pane layouts */
   .pane-left {
-    @apply w-[55%] h-screen border-r border-border overflow-hidden bg-[#0F0F11];
+    @apply w-full h-[50vh] lg:w-[55%] lg:h-screen border-b lg:border-b-0 lg:border-r border-border overflow-hidden bg-[#0F0F11];
   }
   
   .pane-right {
-    @apply w-[45%] h-screen overflow-y-auto bg-background p-6;
+    @apply w-full h-[50vh] lg:w-[45%] lg:h-screen overflow-y-auto bg-background p-4 lg:p-6;
   }
 }
 

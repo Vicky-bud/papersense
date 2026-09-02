@@ -3,6 +3,7 @@ import PdfViewer from './PdfViewer';
 import SynthesisFeed from './SynthesisFeed';
 import NotesScratchpad from './NotesScratchpad';
 import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 export default function Workspace() {
   const { paperId } = useParams<{ paperId: string }>();
@@ -19,7 +20,7 @@ export default function Workspace() {
   };
 
   return (
-    <div className="flex w-full h-screen overflow-hidden bg-background">
+    <div className="flex flex-col lg:flex-row w-full h-screen overflow-hidden bg-background">
       <div className="pane-left relative">
         <PdfViewer url={paperUrl} targetPage={targetPage} highlightChunk={highlightChunk} />
       </div>
@@ -27,8 +28,18 @@ export default function Workspace() {
       <div className="pane-right flex flex-col">
         {/* Workspace Toolbar */}
         <div className="flex items-center justify-between border-b border-border pb-4 mb-6">
-          <div className="flex gap-4">
-            <button 
+          <div className="flex gap-6 items-center">
+            <Link 
+              to="/"
+              className="flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-white transition-colors border-r border-zinc-800 pr-6"
+              title="Back to Dashboard"
+            >
+              <ArrowLeft size={16} />
+              Dashboard
+            </Link>
+            
+            <div className="flex gap-4">
+              <button 
               onClick={() => setActiveTab('synthesis')}
               className={`text-sm font-medium transition-colors ${activeTab === 'synthesis' ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
             >
@@ -40,6 +51,7 @@ export default function Workspace() {
             >
               Scratchpad
             </button>
+            </div>
           </div>
           
           <Link to={`/quiz/${paperId}`} className="text-xs font-mono bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded hover:bg-primary/20 transition-colors">
