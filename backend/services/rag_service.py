@@ -34,6 +34,7 @@ class RagService:
 
             documents = results["documents"][0]
             metadatas = results["metadatas"][0]
+            distances = results.get("distances", [[]])[0] if results.get("distances") else []
             
             sources = []
             context_blocks = []
@@ -41,10 +42,13 @@ class RagService:
             for idx, (doc, meta) in enumerate(zip(documents, metadatas)):
                 page_number = meta.get("page_number", 0)
                 chunk_index = meta.get("chunk_index", 0)
+                distance = distances[idx] if idx < len(distances) else None
+                
                 sources.append({
                     "page_number": page_number,
                     "text": doc,
-                    "chunk_index": chunk_index
+                    "chunk_index": chunk_index,
+                    "similarity_score": distance
                 })
                 context_blocks.append(f"--- Chunk {chunk_index} (Page {page_number}) ---\n{doc}")
                 

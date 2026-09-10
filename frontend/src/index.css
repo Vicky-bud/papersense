@@ -12,22 +12,22 @@
   .border-sharp {
     @apply border border-border;
   }
-  
+
   .card {
     @apply bg-surface border-sharp;
   }
-  
+
   .badge {
     @apply inline-flex items-center justify-center rounded-sm bg-zinc-800 px-2 py-0.5 text-xs font-mono text-zinc-400 border border-zinc-700 cursor-pointer hover:bg-zinc-700 hover:text-white transition-colors;
   }
-  
+
   /* Split pane layouts */
   .pane-left {
-    @apply w-full h-[50vh] lg:w-[55%] lg:h-screen border-b lg:border-b-0 lg:border-r border-border overflow-hidden bg-[#0F0F11];
+    @apply w-full h-[50vh] lg:w-[55%] lg:h-screen lg:border-r border-zinc-800/80 overflow-hidden bg-[#0A0A0A] relative z-10 lg:shadow-[4px_0_24px_rgba(0,0,0,0.8)];
   }
-  
+
   .pane-right {
-    @apply w-full h-[50vh] lg:w-[45%] lg:h-screen overflow-y-auto bg-background p-4 lg:p-6;
+    @apply w-full h-[50vh] lg:w-[45%] lg:h-screen overflow-y-auto bg-[#0F0F11] p-4 lg:p-6 relative z-0;
   }
 }
 

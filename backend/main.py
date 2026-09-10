@@ -4,11 +4,13 @@ from fastapi.staticfiles import StaticFiles
 import os
 from backend.routers import papers, rag, quizzes, collections, notes, chat
 
+from backend.config import settings
+
 app = FastAPI(title="PaperSense API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -63,7 +63,7 @@ export default function PdfViewer({ url, targetPage, highlightChunk }: PdfViewer
       </Document>
       
       {numPages && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900/80 backdrop-blur border border-zinc-700 px-4 py-2 rounded-full flex items-center gap-4 text-xs font-mono z-50">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface border border-border px-4 py-2 rounded-full flex items-center gap-4 text-xs font-mono z-50 shadow-md">
           <button 
             disabled={currentPage <= 1}
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
@@ -87,7 +87,7 @@ export default function PdfViewer({ url, targetPage, highlightChunk }: PdfViewer
       {/* Simulated Highlight Overlay */}
       {highlightChunk !== null && (
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center animate-pulse z-40">
-          <div className="border border-primary bg-primary/5 p-4 rounded text-primary text-xs font-mono shadow-lg backdrop-blur-sm">
+          <div className="border border-primary bg-background p-4 rounded text-primary text-xs font-mono shadow-lg">
             Targeting context from chunk §{highlightChunk} on page {targetPage}
           </div>
         </div>

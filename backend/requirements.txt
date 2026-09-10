@@ -8,6 +8,8 @@ chromadb
 python-multipart
 httpx
 pymupdf
+asyncpg
+psycopg2-binary
 python-docx
 tiktoken
 langchain-text-splitters

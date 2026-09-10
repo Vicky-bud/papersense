@@ -15,6 +15,7 @@ interface Source {
   page_number: number;
   chunk_index: number;
   text: string;
+  similarity_score?: number;
 }
 
 interface HistoryEntry {
@@ -201,22 +202,37 @@ export default function SynthesisFeed({ paperId, onCitationClick }: SynthesisFee
               )}
               
               {entry.sources.length > 0 && (
-                <div className="mt-4 pt-3 border-t border-zinc-800">
-                  <h4 className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest mb-2">Referenced Sources</h4>
-                  <div className="flex flex-wrap gap-1.5">
+                <details className="mt-4 border-t border-zinc-800 group">
+                  <summary className="cursor-pointer py-3 flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest hover:text-zinc-300 transition-colors list-none select-none">
+                    <span className="text-zinc-600 group-open:rotate-90 transition-transform">▶</span>
+                    Retrieved Context ({entry.sources.length} sources)
+                  </summary>
+                  <div className="flex flex-col gap-3 pb-3">
                     {entry.sources.map((src, j) => (
-                      <button
-                        key={j}
-                        onClick={() => onCitationClick(src.page_number, src.chunk_index)}
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700/50 hover:text-zinc-200 hover:border-zinc-600 transition-colors cursor-pointer"
-                        title={src.text.substring(0, 100)}
-                      >
-                        <FileText size={9} />
-                        p.{src.page_number} §{src.chunk_index}
-                      </button>
+                      <div key={j} className="bg-zinc-800/50 rounded-lg p-3 border border-zinc-700/50">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <span 
+                              className="text-xs font-medium text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded flex items-center gap-1 cursor-pointer hover:bg-emerald-400/20 transition-colors"
+                              onClick={() => onCitationClick(src.page_number, src.chunk_index)}
+                            >
+                              <FileText size={12} /> Page {src.page_number}
+                            </span>
+                            <span className="text-[10px] text-zinc-500 font-mono">Chunk {src.chunk_index}</span>
+                          </div>
+                          {src.similarity_score !== undefined && src.similarity_score !== null && (
+                            <span className="text-[10px] text-zinc-500 font-mono" title="Lower distance means higher similarity">
+                              Distance: {src.similarity_score.toFixed(3)}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-zinc-400 line-clamp-3 leading-relaxed hover:line-clamp-none cursor-text transition-all">
+                          {src.text}
+                        </p>
+                      </div>
                     ))}
                   </div>
-                </div>
+                </details>
               )}
             </div>
           </div>
