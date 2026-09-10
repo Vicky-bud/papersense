@@ -68,5 +68,3 @@ PaperSense is an AI-powered research assistant designed to help you quickly synt
 See the `.env.example` file for required environment variables:
 - `GEMINI_API_KEY`: Your Google AI Studio API key.
 
-## License
-MIT License
