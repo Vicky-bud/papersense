@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, FolderOpen, UploadCloud, Trash2, Loader2, Plus, FolderPlus } from 'lucide-react';
+import { Logo } from '../Logo';
 import { Link } from 'react-router-dom';
 import { getPapers, uploadPaper, deletePaper, getCollections, createCollection, addPaperToCollection, getCollectionPapers } from '../../api';
 
@@ -124,7 +125,7 @@ export default function Dashboard() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-12 border-b border-border pb-6">
           <div className="flex items-center gap-3">
-            <BookOpen className="text-primary" size={24} />
+            <Logo className="text-primary" size={28} />
             <h1 className="text-2xl font-semibold tracking-tight text-white">PaperSense</h1>
           </div>
           

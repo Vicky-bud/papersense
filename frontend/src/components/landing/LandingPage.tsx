@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Upload, FileText, Database, Bot, ArrowRight, ArrowDown, BookOpen } from 'lucide-react';
+import { Logo } from '../Logo';
 import { uploadPaper } from '../../api';
 
 export default function LandingPage() {
@@ -35,7 +36,7 @@ export default function LandingPage() {
       <header className="border-b border-border bg-background sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 text-zinc-100 font-semibold tracking-tight text-lg">
-            <BookOpen size={20} className="text-emerald-500" />
+            <Logo size={24} className="text-emerald-500" />
             PaperSense
           </div>
           <button 
