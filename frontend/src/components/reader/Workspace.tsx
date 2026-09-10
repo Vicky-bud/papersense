@@ -4,6 +4,7 @@ import SynthesisFeed from './SynthesisFeed';
 import NotesScratchpad from './NotesScratchpad';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { API_BASE } from '../../api';
 
 export default function Workspace() {
   const { paperId } = useParams<{ paperId: string }>();
@@ -11,7 +12,8 @@ export default function Workspace() {
   const [highlightChunk, setHighlightChunk] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<'synthesis' | 'notes'>('synthesis');
 
-  const paperUrl = `http://localhost:8000/uploads/${paperId}/original.pdf`;
+  const baseUrl = API_BASE.replace('/api/v1', '');
+  const paperUrl = `${baseUrl}/uploads/${paperId}/original.pdf`;
 
   const handleCitationClick = (page: number, chunkIndex: number) => {
     setTargetPage(page);
