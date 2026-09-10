@@ -108,7 +108,7 @@ GEMINI_API_KEY="your_api_key_here"
 
 ## Live Demo
 
-*(Insert deployment link here when available)*
+*PaperSense AI - https://papersense-ai.vercel.app/*
 
 ## API Documentation
 
