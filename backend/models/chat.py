@@ -18,4 +18,4 @@ class ChatHistory(Base):
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     # Relationships
-    paper = relationship("Paper", backref="chat_history")
+    paper = relationship("Paper", back_populates="chat_history")

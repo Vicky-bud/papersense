@@ -27,6 +27,7 @@ class Paper(Base):
     chunks = relationship("Chunk", back_populates="paper", cascade="all, delete-orphan")
     notes = relationship("Note", back_populates="paper", cascade="all, delete-orphan")
     quizzes = relationship("Quiz", back_populates="paper", cascade="all, delete-orphan")
+    chat_history = relationship("ChatHistory", back_populates="paper", cascade="all, delete-orphan")
 
 class Chunk(Base):
     __tablename__ = "chunks"

@@ -1,4 +1,4 @@
-import fitz
+import pymupdf
 import docx
 from typing import List, Dict
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -15,7 +15,7 @@ class DocumentParser:
 
     def parse_pdf(self, file_path: str) -> List[Dict]:
         pages = []
-        doc = fitz.open(file_path)
+        doc = pymupdf.open(file_path)
         for page_num in range(len(doc)):
             page = doc.load_page(page_num)
             text = page.get_text()

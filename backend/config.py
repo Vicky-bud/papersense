@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     # LLM Configuration
     GEMINI_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-3.6-flash"
+    GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-001"
     
     @property
     def sync_database_url(self) -> str:

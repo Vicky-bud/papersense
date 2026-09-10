@@ -2,20 +2,21 @@ import chromadb
 from typing import List, Dict
 import uuid
 import os
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from backend.config import settings
 
 class GeminiEmbeddingFunction(chromadb.EmbeddingFunction):
     def __init__(self):
-        genai.configure(api_key=settings.GEMINI_API_KEY)
+        self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
     
     def __call__(self, input: chromadb.Documents) -> chromadb.Embeddings:
-        response = genai.embed_content(
-            model="models/gemini-embedding-2",
-            content=input,
-            task_type="retrieval_document"
+        response = self.client.models.embed_content(
+            model=settings.GEMINI_EMBEDDING_MODEL,
+            contents=input,
+            config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT")
         )
-        return response['embedding']
+        return [e.values for e in response.embeddings]
 
 class ChromaService:
     def __init__(self):

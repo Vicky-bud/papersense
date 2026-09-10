@@ -2,7 +2,8 @@ import json
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from typing import Dict, Any, List, Optional
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from pydantic import BaseModel, ValidationError
 
 class QuizQuestionSchema(BaseModel):
@@ -19,8 +20,7 @@ from backend.models.quiz import Quiz, QuizQuestion
 
 class QuizGeneratorService:
     def __init__(self):
-        genai.configure(api_key=settings.GEMINI_API_KEY)
-        self.model = genai.GenerativeModel(settings.GEMINI_MODEL)
+        self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
     async def generate_quiz(self, db: AsyncSession, paper_id: str) -> Quiz:
         import uuid
@@ -64,11 +64,10 @@ class QuizGeneratorService:
         )
 
         # 3. Generate content
-        from starlette.concurrency import run_in_threadpool
-        response = await run_in_threadpool(
-            self.model.generate_content,
-            prompt,
-            generation_config=genai.GenerationConfig(
+        response = await self.client.aio.models.generate_content(
+            model=settings.GEMINI_MODEL,
+            contents=prompt,
+            config=types.GenerateContentConfig(
                 response_mime_type="application/json"
             )
         )

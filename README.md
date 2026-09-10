@@ -26,31 +26,27 @@ PaperSense is an AI-powered research assistant designed to help you quickly synt
 
 ### Backend Setup
 
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Create and activate a virtual environment:
+1. Create and activate a virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
-4. Copy the environment variables template and add your API key:
+3. Copy the environment variables template and add your API key:
    ```bash
-   cp ../.env.example .env
+   cp .env.example .env
    # Edit .env and add your GEMINI_API_KEY
    ```
-5. Initialize the database:
+4. Initialize the database:
    ```bash
-   python init_db.py
+   python -m backend.init_db
    ```
-6. Run the FastAPI development server:
+5. Run the FastAPI development server:
    ```bash
-   uvicorn main:app --reload --port 8000
+   uvicorn backend.main:app --reload --port 8000
    ```
 
 ### Frontend Setup

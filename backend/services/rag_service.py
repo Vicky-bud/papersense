@@ -1,14 +1,14 @@
 import os
 from typing import List, Dict
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from backend.services.chroma_service import ChromaService
 from backend.config import settings
 
 class RagService:
     def __init__(self):
         self.chroma = ChromaService()
-        genai.configure(api_key=settings.GEMINI_API_KEY)
-        self.model = genai.GenerativeModel(settings.GEMINI_MODEL)
+        self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
 
     async def query_document(self, paper_id: str, query: str, top_k: int = 5, history: List = None):
         import traceback
@@ -63,12 +63,12 @@ class RagService:
             chat_history = []
             if history:
                 for h in history:
-                    chat_history.append({"role": "user", "parts": [h.query]})
-                    chat_history.append({"role": "model", "parts": [h.answer]})
+                    chat_history.append(types.Content(role="user", parts=[types.Part.from_text(text=h.query)]))
+                    chat_history.append(types.Content(role="model", parts=[types.Part.from_text(text=h.answer)]))
                     
-            chat = self.model.start_chat(history=chat_history)
+            chat = self.client.aio.chats.create(model=settings.GEMINI_MODEL, history=chat_history)
             
-            response = await chat.send_message_async(prompt, stream=True)
+            response = await chat.send_message_stream(prompt)
             
             async for chunk in response:
                 yield f"data: {json.dumps({'type': 'token', 'content': chunk.text})}\n\n"
