@@ -29,15 +29,14 @@ export default function SynthesisFeed({ paperId, onCitationClick }: SynthesisFee
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [initialLoading, setInitialLoading] = useState(true);
+
 
   useEffect(() => {
     getChatHistory(paperId)
       .then(data => {
         setHistory(data);
       })
-      .catch(console.error)
-      .finally(() => setInitialLoading(false));
+      .catch(console.error);
   }, [paperId]);
 
   const handleQuery = async (e: React.FormEvent) => {
@@ -49,7 +48,7 @@ export default function SynthesisFeed({ paperId, onCitationClick }: SynthesisFee
     setQuery('');
     
     // Create a temporary history entry that we will update in-place
-    const tempEntryIndex = history.length;
+
     // Use functional state update to ensure we have the latest history length if multiple renders happen
     setHistory(prev => [...prev, { query: currentQuery, answer: "", sources: [] }]);
     

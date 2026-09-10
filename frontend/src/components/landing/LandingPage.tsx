@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, FileText, Database, Bot, ArrowRight, ArrowDown, ChevronRight, BookOpen } from 'lucide-react';
+import { Upload, FileText, Database, Bot, ArrowRight, ArrowDown, BookOpen } from 'lucide-react';
 import { uploadPaper } from '../../api';
 
 export default function LandingPage() {

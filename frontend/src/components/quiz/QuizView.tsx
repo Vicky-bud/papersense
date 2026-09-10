@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { generateQuiz, submitQuiz } from '../../api';
 import { CheckCircle2, XCircle, ChevronRight, BookOpen, Loader2, Brain, Trophy, RotateCcw, Sparkles, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';

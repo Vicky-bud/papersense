@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PdfViewer from './PdfViewer';
 import SynthesisFeed from './SynthesisFeed';
 import NotesScratchpad from './NotesScratchpad';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BookOpen, FolderOpen, UploadCloud, Trash2, Loader2, Plus, MoreVertical, Check, FolderPlus } from 'lucide-react';
+import { BookOpen, FolderOpen, UploadCloud, Trash2, Loader2, Plus, FolderPlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getPapers, uploadPaper, deletePaper, getCollections, createCollection, addPaperToCollection, getCollectionPapers } from '../../api';
 

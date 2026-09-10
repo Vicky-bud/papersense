@@ -1,5 +1,4 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Workspace from './components/reader/Workspace';
 import QuizView from './components/quiz/QuizView';
 import Dashboard from './components/dashboard/Dashboard';
