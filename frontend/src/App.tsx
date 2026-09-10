@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Workspace from './components/reader/Workspace';
 import QuizView from './components/quiz/QuizView';
 import Dashboard from './components/dashboard/Dashboard';
+import NotFound from './components/NotFound';
 import LandingPage from './components/landing/LandingPage';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/workspace/:paperId" element={<Workspace />} />
         <Route path="/quiz/:paperId" element={<QuizRouteWrapper />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

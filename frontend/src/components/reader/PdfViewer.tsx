@@ -43,24 +43,26 @@ export default function PdfViewer({ url, targetPage, highlightChunk }: PdfViewer
   }
 
   return (
-    <div className="w-full h-full relative overflow-y-auto bg-[#09090B] flex flex-col items-center py-8" ref={containerRef}>
-      <Document
-        file={url}
-        onLoadSuccess={onDocumentLoadSuccess}
-        className="flex flex-col items-center"
-        loading={
-          <div className="text-zinc-500 font-mono text-sm mt-20">Loading document securely...</div>
-        }
-      >
-        <div className={`transition-all duration-300 ${highlightChunk !== null ? 'ring-2 ring-primary ring-inset' : ''}`}>
-          <Page 
-            pageNumber={currentPage} 
-            width={containerWidth * 0.9} 
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
-          />
-        </div>
-      </Document>
+    <div className="w-full h-full relative overflow-hidden bg-[#09090B] flex flex-col items-center" ref={containerRef}>
+      <div className="w-full h-full overflow-y-auto flex flex-col items-center py-8">
+        <Document
+          file={url}
+          onLoadSuccess={onDocumentLoadSuccess}
+          className="flex flex-col items-center"
+          loading={
+            <div className="text-zinc-500 font-mono text-sm mt-20">Loading document securely...</div>
+          }
+        >
+          <div className={`transition-all duration-300 ${highlightChunk !== null ? 'ring-2 ring-primary ring-inset' : ''}`}>
+            <Page 
+              pageNumber={currentPage} 
+              width={containerWidth * 0.9} 
+              renderTextLayer={true}
+              renderAnnotationLayer={true}
+            />
+          </div>
+        </Document>
+      </div>
       
       {numPages && (
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface border border-border px-4 py-2 rounded-full flex items-center gap-4 text-xs font-mono z-50 shadow-md">
