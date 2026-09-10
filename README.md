@@ -97,7 +97,14 @@ GEMINI_API_KEY="your_api_key_here"
 
 ## Screenshots
 
-*(Add screenshots of the Landing Page, Dashboard, and Synthesis Feed here)*
+### Landing Page
+![Landing Page](docs/assets/landing.png)
+
+### Dashboard
+![Dashboard](docs/assets/dashboard.png)
+
+### RAG Synthesis Feed & Workspace
+![Workspace](docs/assets/workspace.png)
 
 ## Live Demo
 
