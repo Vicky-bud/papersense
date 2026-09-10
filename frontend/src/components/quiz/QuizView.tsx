@@ -205,7 +205,14 @@ export default function QuizView({ paperId }: { paperId: string }) {
     const gradeColor = pct >= 80 ? 'text-emerald-400' : pct >= 60 ? 'text-amber-400' : 'text-red-400';
 
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen w-full bg-background">
+      <div className="flex flex-col items-center justify-center min-h-screen w-full bg-background relative">
+        <Link 
+          to={`/workspace/${paperId}`}
+          className="absolute top-8 left-8 flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors"
+        >
+          <ArrowLeft size={16} />
+          Back to Workspace
+        </Link>
         <div className="w-20 h-20 rounded-2xl bg-zinc-800/50 border border-zinc-700/50 flex items-center justify-center mb-6">
           <Trophy size={36} className={gradeColor} />
         </div>
@@ -233,13 +240,22 @@ export default function QuizView({ paperId }: { paperId: string }) {
           {finalScore.correct_answers} of {finalScore.total_questions} correct
         </p>
         
-        <button
-          onClick={loadQuiz}
-          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-zinc-300 bg-zinc-800 border border-zinc-700 rounded-lg hover:bg-zinc-700 transition-colors"
-        >
-          <RotateCcw size={14} />
-          Retake Quiz
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={loadQuiz}
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-zinc-300 bg-zinc-800 border border-zinc-700 rounded-lg hover:bg-zinc-700 transition-colors"
+          >
+            <RotateCcw size={14} />
+            Retake Quiz
+          </button>
+          <Link
+            to={`/workspace/${paperId}`}
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-zinc-950 bg-zinc-100 rounded-lg hover:bg-white transition-colors"
+          >
+            Return to Reading
+            <ChevronRight size={14} />
+          </Link>
+        </div>
       </div>
     );
   }

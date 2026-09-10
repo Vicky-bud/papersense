@@ -1,3 +1,4 @@
+import uuid
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -19,7 +20,8 @@ class NoteResponse(BaseModel):
 
 @router.get("/{paper_id}", response_model=NoteResponse)
 async def get_note(paper_id: str, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Note).where(Note.paper_id == paper_id))
+    paper_uuid = uuid.UUID(paper_id)
+    result = await db.execute(select(Note).where(Note.paper_id == paper_uuid))
     note = result.scalar_one_or_none()
     
     if not note:
@@ -31,13 +33,14 @@ async def get_note(paper_id: str, db: AsyncSession = Depends(get_db)):
 @router.post("/", response_model=NoteResponse)
 async def save_note(request: NoteSaveRequest, db: AsyncSession = Depends(get_db)):
     # Upsert logic for simple debounce
-    result = await db.execute(select(Note).where(Note.paper_id == request.paper_id))
+    paper_uuid = uuid.UUID(request.paper_id)
+    result = await db.execute(select(Note).where(Note.paper_id == paper_uuid))
     note = result.scalar_one_or_none()
     
     if note:
         note.content = request.content
     else:
-        note = Note(paper_id=request.paper_id, content=request.content)
+        note = Note(paper_id=paper_uuid, content=request.content)
         db.add(note)
         
     await db.commit()

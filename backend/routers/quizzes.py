@@ -71,11 +71,17 @@ async def generate_quiz(request: QuizGenerationRequest, db: AsyncSession = Depen
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        import traceback
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Quiz Generation Error for {request.paper_id}: {e}")
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail="Failed to generate quiz: " + str(e))
 
 @router.post("/{quiz_id}/submit", response_model=QuizSubmissionResponse)
 async def submit_quiz(quiz_id: str, request: QuizSubmissionRequest, db: AsyncSession = Depends(get_db)):
-    stmt = select(QuizQuestion).where(QuizQuestion.quiz_id == quiz_id)
+    quiz_uuid = uuid.UUID(quiz_id)
+    stmt = select(QuizQuestion).where(QuizQuestion.quiz_id == quiz_uuid)
     result = await db.execute(stmt)
     questions = result.scalars().all()
     
@@ -93,7 +99,7 @@ async def submit_quiz(quiz_id: str, request: QuizSubmissionRequest, db: AsyncSes
     score = (correct_answers / total_questions) * 100 if total_questions > 0 else 0.0
     
     submission = QuizSubmission(
-        quiz_id=quiz_id,
+        quiz_id=quiz_uuid,
         score=score,
         total_questions=total_questions,
         correct_answers=correct_answers
